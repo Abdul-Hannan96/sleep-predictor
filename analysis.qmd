@@ -1,0 +1,354 @@
+---
+title: "Sleep Efficiency Analysis by Lifestyle Factors"
+format: 
+  html:
+    toc: false
+    code-fold: false
+    echo: false
+    message: false
+    warning: false
+    fig-align: center
+    fig-cap-location: bottom
+---
+
+```{r}
+#| label: "load-libraries"
+#| include: false
+
+# Load required libraries
+
+library(plotly)
+library(reshape2)
+library(plotly)
+library(dplyr)
+library(RColorBrewer)
+```
+
+```{r}
+
+# Load the dataset (replace 'path/to/Sleep_Efficiency.csv' with your actual file path)
+df <- read.csv("Sleep_Efficiency.csv", stringsAsFactors = FALSE)
+
+# Rename columns for clarity
+df <- df %>%
+  rename(
+    ID = id,
+    Age = age,
+    Gender = gender,
+    Bedtime = bedtime,
+    `Wakeup Time` = wakeup_time,
+    `Sleep Duration (hours)` = sleep_duration,
+    `Sleep Efficiency` = sleep_efficiency,
+    `REM Sleep (%)` = rem_sleep_percentage,
+    `Deep Sleep (%)` = deep_sleep_percentage,
+    `Light Sleep (%)` = light_sleep_percentage,
+    Awakenings = awakenings,
+    `Caffeine Consumption (mg)` = caffeine_consumption,
+    `Alcohol Consumption (drinks)` = alcohol_consumption,
+    `Smoking Status` = smoking_status,
+    `Exercise Frequency (days/week)` = exercise_frequency
+  )
+
+# Handle missing values (replace NA with 0 for numerical columns)
+df <- df %>%
+  mutate(
+    Awakenings = ifelse(is.na(Awakenings), 0, Awakenings),
+    `Caffeine Consumption (mg)` = ifelse(is.na(`Caffeine Consumption (mg)`), 0, `Caffeine Consumption (mg)`),
+    `Alcohol Consumption (drinks)` = ifelse(is.na(`Alcohol Consumption (drinks)`), 0, `Alcohol Consumption (drinks)`)
+  )
+
+
+```
+<br>
+<br>
+<br>
+
+**Exploring the Relationship Between Sleep Habits and Quality**
+```{r}
+# Define a custom color palette for Gender
+gender_colors <- c("Male" = "#6495ED", "Female" = "#FF7F50")  # Cornflower Blue and Coral
+
+plot1 <- plot_ly(
+  data = df,
+  x = ~`Sleep Duration (hours)`,
+  y = ~(`Sleep Efficiency` * 100),
+  color = ~Gender,
+  colors = gender_colors,
+  type = "scatter",
+  mode = "markers",
+  marker = list(
+    size = 12,
+    opacity = 0.7,
+    line = list(color = "black", width = 1)
+  ),
+  hovertemplate = paste(
+    "<b>Gender:</b> %{customdata.Gender}<br>",
+    "<b>Sleep Duration:</b> %{x:.1f} hours<br>",
+    "<b>Sleep Efficiency:</b> %{y:.0f}%<extra></extra>"
+  ),
+  customdata = ~Gender
+) %>%
+  layout(
+    title = list(
+      text = paste0(
+        "Sleep Efficiency vs. Sleep Duration by Gender"
+        
+      ),
+      font = list(family = "Times New Roman", size = 24, color = "#2c3e50"),
+      x = 0,
+      y = 0.95,
+      yanchor = "top",
+      xref = "paper"
+    ),
+    xaxis = list(
+      title = list(text = "Sleep Duration (hours)", font = list(family = "Calibri", size = 16, color = "#555555")),
+      gridcolor = "lightgray",
+      zeroline = FALSE
+    ),
+    yaxis = list(
+      title = list(text = "Sleep Efficiency (%)", font = list(family = "Calibri", size = 16, color = "#555555")),
+      gridcolor = "lightgray",
+      zeroline = FALSE,
+      range = c(min(df$`Sleep Efficiency` * 100) - 5, max(df$`Sleep Efficiency` * 100) + 5)
+    ),
+    legend = list(
+      orientation = "v",
+      x = 1.02, y = 0.5,
+      xanchor = "left", yanchor = "middle",
+      font = list(family = "Calibri", size = 14),
+      title = list(text = "")
+    ),
+    plot_bgcolor = "#f8f8f8",
+    paper_bgcolor = "#f8f8f8",
+    margin = list(t = 100)  # Same top margin as box plot
+  ) %>%
+  config(displayModeBar = FALSE)
+
+plot1
+
+```
+<br>
+
+This scatter plot shows how sleep duration (hours) and sleep efficiency (%) are related, separated by gender. Most people sleep between 6 to 9 hours, and the best sleep efficiency usually happens with 7 to 8 hours of sleep. Both male and female participants show similar patterns, meaning their sleep quality follows the same trend.
+
+<br>
+**How different activity levels relate to sleep quality?**
+```{r}
+# Define a colorful palette for different exercise frequencies
+color_palette <- RColorBrewer::brewer.pal(n = length(unique(df$`Exercise Frequency (days/week)`)), name = "Set2")
+
+plot2 <- plot_ly(
+  data = df,
+  x = ~factor(`Exercise Frequency (days/week)`),
+  y = ~`Sleep Efficiency`, # Keep y-axis scale as is, only hover changes
+  type = "box",
+  boxpoints = "all",      # Show all individual points
+  jitter = 0.5,           # Slight horizontal spread
+  pointpos = 0,           # Center points on box
+  color = ~factor(`Exercise Frequency (days/week)`),
+  colors = color_palette,
+  marker = list(
+    size = 6,
+    opacity = 0.6,
+    line = list(width = 1, color = "black")
+  ),
+  # MODIFIED: Changed Sleep Efficiency in hover text to percentage
+  text = ~paste(
+    "<b>Exercise:</b> ", `Exercise Frequency (days/week)`, " days/week<br>",
+    "<b>Sleep Efficiency:</b> ", round(`Sleep Efficiency` * 100, 0), "%" # Converted to percentage, rounded to 0 decimal places, added %
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = list(
+      text = paste0(
+        "Sleep Efficiency by Exercise Frequency"
+      ),
+      font = list(family = "Times New Roman", size = 24, color = "#2c3e50"),
+      x = 0,
+      y = 0.95,
+      yanchor = "top",
+      xref = "paper"
+    ),
+    xaxis = list(
+      title = list(text = "Exercise Frequency (days/week)", font = list(family = "Calibri", size = 16)),
+      tickfont = list(size = 14),
+      gridcolor = "#e0e0e0"
+    ),
+    yaxis = list(
+      title = list(text = "Sleep Efficiency", font = list(family = "Calibri", size = 16)),
+      tickfont = list(size = 14),
+      gridcolor = "#e0e0e0"
+    ),
+    showlegend = FALSE,
+    plot_bgcolor = "#f8f8f8",
+    paper_bgcolor = "#f8f8f8",
+    margin = list(t = 100, l = 60, r = 40, b = 60)
+  ) %>%
+  config(displayModeBar = FALSE) # Disable zoom, pan, etc.
+
+plot2
+```
+<br>
+
+This box plot shows how often people exercise in a week and how it affects their sleep efficiency. People who exercise more days tend to have slightly better sleep quality. However, there is still a lot of variation, meaning not everyone who exercises more always sleeps better. Regular exercise seems to be linked with better sleep for many people.
+
+
+<br>
+**How smoking habits relate to sleep quality?**
+```{r}
+
+# Prepare data
+sleep_stages <- df %>%
+  group_by(`Smoking Status`) %>%
+  summarise(
+    `REM Sleep (%)` = mean(`REM Sleep (%)`, na.rm = TRUE),
+    `Deep Sleep (%)` = mean(`Deep Sleep (%)`, na.rm = TRUE),
+    `Light Sleep (%)` = mean(`Light Sleep (%)`, na.rm = TRUE)
+  ) %>%
+  melt(id.vars = "Smoking Status", variable.name = "Sleep Stage", value.name = "Percentage")
+
+# Define a custom color palette for sleep stages
+stage_colors <- c("REM Sleep (%)" = "#8dd3c7", "Deep Sleep (%)" = "#fb8072", "Light Sleep (%)" = "#80b1d3")
+
+# Create plot
+plot3 <- plot_ly(
+  data = sleep_stages,
+  x = ~`Smoking Status`,
+  y = ~Percentage,
+  color = ~`Sleep Stage`,
+  colors = stage_colors,
+  type = "bar",
+  text = ~paste(
+    "<b>Smoking Status:</b> ", `Smoking Status`, "<br>",
+    "<b>Sleep Stage:</b> ", `Sleep Stage`, "<br>",
+    "<b>Average:</b> ", round(Percentage, 1), "%"
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    title = list(
+      text = paste0(
+        "Average Sleep Stage Percentages by Smoking Status"
+        
+      ),
+      font = list(family = "Times New Roman", size = 24, color = "#2c3e50"),
+      x = 0,
+      y = 0.95,
+      yanchor = "top",
+      xref = "paper"
+    ),
+    xaxis = list(
+      title = list(text = "Smoking Status", font = list(family = "Calibri", size = 16, color = "#555555")),
+      tickfont = list(size = 14),
+      gridcolor = "#e0e0e0"
+    ),
+    yaxis = list(
+      title = list(text = "Average Sleep Stage (%)", font = list(family = "Calibri", size = 16, color = "#555555")),
+      tickfont = list(size = 14),
+      gridcolor = "#e0e0e0"
+    ),
+    barmode = "group",
+    showlegend = TRUE,
+    legend = list(
+      orientation = "v",
+      x = 1.02, y = 0.5,
+      xanchor = "left", yanchor = "middle",
+      font = list(family = "Calibri", size = 14),
+      title = list(text = "")
+    ),
+    plot_bgcolor = "#f8f8f8",
+    paper_bgcolor = "#f8f8f8",
+    margin = list(t = 100, l = 60, r = 40, b = 60)
+  ) %>%
+  config(displayModeBar = FALSE)
+
+plot3
+
+```
+<br>
+This bar plot shows how much time people spend in each sleep stage based on their smoking status. Non-smokers tend to have better deep and REM sleep compared to smokers. Smoking seems to reduce the amount of deep and REM sleep, which are important for feeling rested. So, smoking may hurt sleep quality by affecting the balance of sleep stages.
+
+<br>
+
+**Exploring relationships among health and habit variables**
+```{r}
+
+# Select numeric columns
+num_cols <- df %>%
+  select(
+    `Age`,
+    `Sleep Duration (hours)`,
+    `Sleep Efficiency`,
+    `REM Sleep (%)`,
+    `Deep Sleep (%)`,
+    `Light Sleep (%)`,
+    `Awakenings`,
+    `Caffeine Consumption (mg)`,
+    `Alcohol Consumption (drinks)`,
+    `Exercise Frequency (days/week)`
+  )
+
+# Compute correlation matrix
+cor_matrix <- cor(num_cols, use = "complete.obs")
+cor_data <- melt(cor_matrix)
+colnames(cor_data) <- c("Variable1", "Variable2", "Correlation")
+
+# Create the heatmap plot
+plot4 <- plot_ly(
+  data = cor_data,
+  x = ~Variable1,
+  y = ~Variable2,
+  z = ~Correlation,
+  type = "heatmap",
+  colorscale = "RdBu",
+  zmin = -1,
+  zmax = 1,
+  text = ~paste0(
+    "<b>Variable 1:</b> ", Variable1, "<br>",
+    "<b>Variable 2:</b> ", Variable2, "<br>",
+    "<b>Correlation:</b> ", round(Correlation, 2)
+  ),
+  hoverinfo = "text",
+  showscale = TRUE,
+  colorbar = list(
+    title = "Correlation",
+    titlefont = list(family = "Calibri", size = 14),
+    tickfont = list(family = "Calibri", size = 12)
+  )
+) %>%
+  layout(
+    title = list(
+      text = paste0(
+        "Correlation Matrix of Sleep and Lifestyle Factors"
+       
+      ),
+      font = list(family = "Times New Roman", size = 24, color = "#2c3e50"),
+      x = 0.75,
+      y = 0.95,
+      yanchor = "top",
+      xref = "paper"
+    ),
+    xaxis = list(
+      title = list(text = "", font = list(family = "Calibri", size = 16, color = "#555555")),
+      tickfont = list(size = 12, color = "#333333"),
+      tickangle = 45,
+      gridcolor = "#e0e0e0"
+    ),
+    yaxis = list(
+      title = list(text = "", font = list(family = "Calibri", size = 16, color = "#555555")),
+      tickfont = list(size = 12, color = "#333333"),
+      gridcolor = "#e0e0e0"
+    ),
+    plot_bgcolor = "#f8f8f8",
+    paper_bgcolor = "#f8f8f8",
+    margin = list(t = 100, l = 60, r = 40, b = 60)
+  ) %>%
+  config(displayModeBar = FALSE)
+
+plot4
+
+
+```
+<br>
+This heatmap shows how different sleep and lifestyle factors are related to each other. Dark red means a strong positive connection, while dark blue means a strong negative one. For example, more awakenings are linked with lower sleep efficiency, while longer sleep is linked with better sleep efficiency. It helps us quickly see which habits might improve or harm sleep quality.

@@ -1,5 +1,5 @@
 ---
-title: "Sleep Efficiency Analysis by Lifestyle Factors and Demographic Attributes"
+title: "Sleep Predictor"
 format: 
   html:
     toc: false
@@ -16,7 +16,8 @@ format:
 Abdul Hannan
 <br>
 <br>
-**How do exercise, caffeine, alcohol, and smoking influence sleep efficiency across different age and gender groups?**
+**How do lifestyle habits impact sleep efficiency?**
+
 
 ```{r}
 #| label: "load-libraries"

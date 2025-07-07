@@ -1,0 +1,116 @@
+---
+title: "Predicting Sleep Efficiency: Model Comparison and Explanation"
+format: html
+execute: 
+  echo: false
+  warning: false
+  message: false
+---
+
+## 📁 Comparing Features
+
+```{r}
+#| label: load-libraries
+#| include: false
+
+library(tidyverse)
+library(tidymodels)
+library(parsnip)
+library(broom)
+library(marginaleffects)
+library(knitr)
+```
+```{r}
+#| label: load-data
+#| cache: true
+
+df <- read_csv("Sleep_Efficiency.csv") |> 
+  mutate(
+    smoking_status = factor(smoking_status, levels = c("No", "Yes")),
+    gender = factor(gender)
+  ) |>
+  drop_na(sleep_efficiency, age, smoking_status, caffeine_consumption)
+
+```
+```{r}
+# Fit models
+model1 <- linear_reg() |> fit(sleep_efficiency ~ age + smoking_status, data = df)
+model2 <- linear_reg() |> fit(sleep_efficiency ~ caffeine_consumption + smoking_status, data = df)
+model3 <- linear_reg() |> fit(sleep_efficiency ~ age + caffeine_consumption, data = df)
+
+# Compare models using R-squared
+results <- bind_rows(
+  glance(model1) |> mutate(model = "age + smoking_status"),
+  glance(model2) |> mutate(model = "caffeine + smoking"),
+  glance(model3) |> mutate(model = "age + caffeine")
+)
+
+# Format as percentages
+results <- results |>
+  mutate(across(contains("r.squared"), scales::percent_format(accuracy = 0.1)))
+
+# Display table
+results |>
+  select(model, r.squared, adj.r.squared) |>
+  kable(caption = "Model Comparison Based on R-squared (%)")
+
+```
+
+## 📊 Statistical Model
+
+We use a **linear regression model** to estimate how **age** and **smoking status** affect sleep efficiency:
+
+$$
+\hat{Y} = \beta_0 + \beta_1 \cdot \text{Age} + \beta_2 \cdot \text{SmokingStatus}_{\text{Yes}} + \epsilon
+$$
+
+This model assumes:
+
+- **Y** = sleep efficiency  
+- **Age** = age of the participant  
+- **SmokingStatus<sub>Yes</sub>** = 1 if smoker, 0 if non-smoker  
+- **β₀** = intercept (baseline sleep efficiency)  
+- **β₁, β₂** = effect of each predictor  
+- **ε** = random error not explained by predictors
+
+
+```{r}
+# Show model coefficients with confidence intervals
+tidy(model1, conf.int = TRUE) |>
+  select(term, estimate, conf.low, conf.high) |>
+  kable(
+    caption = "Estimates and 95% Confidence Intervals for Parameters  
+    Source: Sleep Efficiency Dataset"
+  )
+
+```
+
+```{r}
+plot_predictions(model1, condition = "smoking_status", draw = FALSE) |>
+  ggplot(aes(x = smoking_status, y = estimate, color = smoking_status)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high),
+                  size = 1.2, linewidth = 1.5, fatten = 3) +
+  scale_color_manual(values = c("No" = "#2ECC71", "Yes" = "#E74C3C")) +
+  labs(
+    title = "Predicted Sleep Efficiency by Smoking Status",
+    subtitle = "Smokers tend to have lower predicted sleep efficiency than non-smokers",
+    caption = "Source: Sleep Efficiency Dataset",
+    x = "Smoking Status",
+    y = "Predicted Sleep Efficiency",
+    color = "Smoking"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+```
+
+
+<br>
+<br>
+## 📝 Summary of Analysis
+
+- We compared **three linear models** with different predictors to explain sleep efficiency.
+- The **best-performing model** included **age** and **smoking status** as predictors.
+- **Smoking** was associated with **lower sleep efficiency**, even after adjusting for age.
+- **Age** also had a **small negative effect** on sleep quality.
+- These results suggest that both **lifestyle factors (like smoking)** and **demographics (like age)** influence sleep health.
