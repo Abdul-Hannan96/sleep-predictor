@@ -4,8 +4,8 @@ project:
 website:
   title: "Sleep Efficiency Project"
   navbar:
-    background: "#003366"   # Dark blue for contrast and professionalism
-    foreground: "#FFFFFF"   # White text
+    background: "#003366"
+    foreground: "#FFFFFF"
     left:
       - text: "HOME"
         file: index.qmd
@@ -15,7 +15,10 @@ website:
         file: model.qmd
       - text: "ABOUT"
         file: about.qmd
+      - text: "SOURCE"
+        file: source.qmd
+
 format:
   html:
-    theme: cosmo  # Optional stylish theme
-    css: styles.css  # Optional: your custom CSS for extra polish
+    theme: cosmo
+    css: styles.css

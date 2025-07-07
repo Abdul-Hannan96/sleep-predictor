@@ -1,0 +1,12 @@
+---
+title: "Sleep Efficiency Analysis by Lifestyle Factors and Demographic Attributes"
+format: 
+  html:
+    toc: false
+    code-fold: false
+    echo: false
+    message: false
+    warning: false
+    fig-align: center
+    fig-cap-location: bottom
+---

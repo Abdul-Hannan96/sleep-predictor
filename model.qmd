@@ -1,10 +1,21 @@
 ---
 title: "Predicting Sleep Efficiency: Model Comparison and Explanation"
-format: html
-execute: 
-  echo: false
-  warning: false
-  message: false
+format: 
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 8
+    toc-title: "📋 Model Evaluation"
+    code-fold: false
+    echo: false
+    message: false
+    warning: false
+    fig-align: center
+    fig-cap-location: bottom
+    smooth-scroll: true
+execute:
+  cache: true
+
 ---
 
 ## 📁 Comparing Features
@@ -55,7 +66,8 @@ results |>
   kable(caption = "Model Comparison Based on R-squared (%)")
 
 ```
-
+<br>
+<br>
 ## 📊 Statistical Model
 
 We use a **linear regression model** to estimate how **age** and **smoking status** affect sleep efficiency:
@@ -107,6 +119,8 @@ plot_predictions(model1, condition = "smoking_status", draw = FALSE) |>
 
 <br>
 <br>
+
+
 ## 📝 Summary of Analysis
 
 - We compared **three linear models** with different predictors to explain sleep efficiency.

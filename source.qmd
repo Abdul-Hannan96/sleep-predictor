@@ -1,0 +1,8 @@
+## 📚 Data Source
+
+This project explores how lifestyle and body-related factors affect **sleep efficiency**.  
+The dataset includes details like sleep patterns, bedtime/wake-up times, and personal habits such as **caffeine, alcohol, smoking, and exercise**.  
+I used **AI tools** for cleaning messy data, making visual plots, and applying models to find useful patterns.  
+The data was collected from Kaggle and is part of a capstone project.
+
+🔗 [Sleep Efficiency Dataset on Kaggle](https://www.kaggle.com/datasets/melvillepais/capstone-1)

@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Sleep Efficiency Project",
+    "section": "",
+    "text": "CS graduate from UMT Lahore who loves to travel and is passionate about data analysis and machine learning. Actively exploring R and statistical modeling to deepen my data science expertise. Always learning, always curious.\n\n\n\nSleep Efficiency Predictor\nDescription:\nA data-driven project analyzing how physiological and lifestyle factors affect sleep efficiency. It uses sleep patterns, wake/sleep habits, and behaviors (e.g., caffeine, alcohol, smoking, exercise) to model and visualize sleep quality.\n\n This project was developed as part of\nKane’s Data Science Bootcamp."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Sleep Predictor",
+    "section": "",
+    "text": "AUTHOR\nAbdul Hannan   HOW DO LIFESTYLE HABITS IMPACT SLEEP EFFICIENCY?"
+  },
+  {
+    "objectID": "index.html#sleep-efficiency-lifestyle-habits",
+    "href": "index.html#sleep-efficiency-lifestyle-habits",
+    "title": "Sleep Predictor",
+    "section": "🛌 Sleep Efficiency & Lifestyle Habits",
+    "text": "🛌 Sleep Efficiency & Lifestyle Habits\nThis dataset explores how lifestyle habits — such as exercise, caffeine, alcohol, and smoking — affect sleep efficiency. Originally published on Kaggle in 2021, the data combines detailed sleep tracking information with daily behavioral patterns from anonymous individuals.\n\n\n🎯 Objective\nThe goal of this analysis is to understand how everyday behaviors influence the quality of sleep, as measured by sleep efficiency.\n\n\n\n🔬 Modeling Sleep Efficiency\nWe modeled sleep efficiency as a linear function of several lifestyle variables: - 🏋️‍♂️ Exercise Frequency - ☕ Caffeine Consumption - 🍷 Alcohol Intake - 🚬 Smoking Status\n\n\n\n📈 Key Findings\n\nIndividuals who exercise more frequently tend to have higher sleep efficiency.\nHigher caffeine or alcohol consumption is generally linked to poorer sleep quality.\nFor every unit increase in exercise frequency, sleep efficiency improves by ~3% (±0.5%).\n\n\n💡 Insight: Regular physical activity appears to be the strongest predictor of better sleep in this dataset."
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "Sleep Efficiency Analysis by Lifestyle Factors",
+    "section": "",
+    "text": "Exploring the Relationship Between Sleep Habits and Quality\n\n\n\n\n\n\n\nThis scatter plot shows how sleep duration (hours) and sleep efficiency (%) are related, separated by gender. Most people sleep between 6 to 9 hours, and the best sleep efficiency usually happens with 7 to 8 hours of sleep. Both male and female participants show similar patterns, meaning their sleep quality follows the same trend.\n How different activity levels relate to sleep quality?\n\n\n\n\n\n\n\nThis box plot shows how often people exercise in a week and how it affects their sleep efficiency. People who exercise more days tend to have slightly better sleep quality. However, there is still a lot of variation, meaning not everyone who exercises more always sleeps better. Regular exercise seems to be linked with better sleep for many people.\n How smoking habits relate to sleep quality?\n\n\n\n\n\n\n This bar plot shows how much time people spend in each sleep stage based on their smoking status. Non-smokers tend to have better deep and REM sleep compared to smokers. Smoking seems to reduce the amount of deep and REM sleep, which are important for feeling rested. So, smoking may hurt sleep quality by affecting the balance of sleep stages.\n\nExploring relationships among health and habit variables\n\n\n\n\n\n\n This heatmap shows how different sleep and lifestyle factors are related to each other. Dark red means a strong positive connection, while dark blue means a strong negative one. For example, more awakenings are linked with lower sleep efficiency, while longer sleep is linked with better sleep efficiency. It helps us quickly see which habits might improve or harm sleep quality."
+  },
+  {
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "Predicting Sleep Efficiency: Model Comparison and Explanation",
+    "section": "",
+    "text": "Model Comparison Based on R-squared (%)\n\n\nmodel\nr.squared\nadj.r.squared\n\n\n\n\nage + smoking_status\n9.8%\n9.4%\n\n\ncaffeine + smoking\n9.2%\n8.7%\n\n\nage + caffeine\n1.7%\n1.2%\n\n\n\n\n\n  ## 📊 Statistical Model\nWe use a linear regression model to estimate how age and smoking status affect sleep efficiency:\n\\[\n\\hat{Y} = \\beta_0 + \\beta_1 \\cdot \\text{Age} + \\beta_2 \\cdot \\text{SmokingStatus}_{\\text{Yes}} + \\epsilon\n\\]\nThis model assumes:\n\nY = sleep efficiency\n\nAge = age of the participant\n\nSmokingStatusYes = 1 if smoker, 0 if non-smoker\n\nβ₀ = intercept (baseline sleep efficiency)\n\nβ₁, β₂ = effect of each predictor\n\nε = random error not explained by predictors\n\n\n\n\nEstimates and 95% Confidence Intervals for Parameters\nSource: Sleep Efficiency Dataset\n\n\nterm\nestimate\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.7744898\n0.7340617\n0.8149178\n\n\nage\n0.0010837\n0.0001575\n0.0020099\n\n\nsmoking_statusYes\n-0.0846379\n-0.1106438\n-0.0586320"
+  },
+  {
+    "objectID": "model.html#linear-model-of-sleep-efficiency",
+    "href": "model.html#linear-model-of-sleep-efficiency",
+    "title": "Predicting Sleep Efficiency",
+    "section": "",
+    "text": "We use a linear regression model to estimate which lifestyle or demographic variables best predict sleep efficiency:\n\\[\nY = \\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_n X_n + \\epsilon\n\\]\nWhere:\n\nY = sleep efficiency\n\nX₁, X₂, …, Xₙ = predictors (e.g., age, smoking status, caffeine consumption)\n\nε = unexplained error\n\n\n\n\n\nModel Comparison Based on R-squared (%)\n\n\nmodel\nr.squared\nadj.r.squared\n\n\n\n\nage + smoking_status\n9.8%\n9.4%\n\n\ncaffeine + smoking\n9.2%\n8.7%\n\n\nage + caffeine\n1.7%\n1.2%"
+  },
+  {
+    "objectID": "model.html#load-libraries-and-data",
+    "href": "model.html#load-libraries-and-data",
+    "title": "Predicting Sleep Efficiency: Model Comparison and Explanation",
+    "section": "",
+    "text": "Model Comparison Based on R-squared (%)\n\n\nmodel\nr.squared\nadj.r.squared\n\n\n\n\nage + smoking_status\n9.8%\n9.4%\n\n\ncaffeine + smoking\n9.2%\n8.7%\n\n\nage + caffeine\n1.7%\n1.2%"
+  },
+  {
+    "objectID": "model.html#statistical-model",
+    "href": "model.html#statistical-model",
+    "title": "Predicting Sleep Efficiency: Model Comparison and Explanation",
+    "section": "📊 Statistical Model",
+    "text": "📊 Statistical Model\nWe use a linear regression model to estimate how age and smoking status affect sleep efficiency:\n\\[\n\\hat{Y} = \\beta_0 + \\beta_1 \\cdot \\text{Age} + \\beta_2 \\cdot \\text{SmokingStatus}_{\\text{Yes}} + \\epsilon\n\\]\nThis model assumes:\n\nY = sleep efficiency\n\nAge = age of the participant\n\nSmokingStatusYes = 1 if smoker, 0 if non-smoker\n\nβ₀ = intercept (baseline sleep efficiency)\n\nβ₁, β₂ = effect of each predictor\n\nε = random error not explained by predictors\n\n\n\n\nEstimates and 95% Confidence Intervals for Parameters\nSource: Sleep Efficiency Dataset\n\n\nterm\nestimate\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.7744898\n0.7340617\n0.8149178\n\n\nage\n0.0010837\n0.0001575\n0.0020099\n\n\nsmoking_statusYes\n-0.0846379\n-0.1106438\n-0.0586320\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  ## 📝 Summary of Analysis\n\nWe compared three linear models with different predictors to explain sleep efficiency.\nThe best-performing model included age and smoking status as predictors.\nSmoking was associated with lower sleep efficiency, even after adjusting for age.\nAge also had a small negative effect on sleep quality.\nThese results suggest that both lifestyle factors (like smoking) and demographics (like age) influence sleep health."
+  },
+  {
+    "objectID": "model.html#comparing-features",
+    "href": "model.html#comparing-features",
+    "title": "Predicting Sleep Efficiency: Model Comparison and Explanation",
+    "section": "",
+    "text": "Model Comparison Based on R-squared (%)\n\n\nmodel\nr.squared\nadj.r.squared\n\n\n\n\nage + smoking_status\n9.8%\n9.4%\n\n\ncaffeine + smoking\n9.2%\n8.7%\n\n\nage + caffeine\n1.7%\n1.2%\n\n\n\n\n\n  ## 📊 Statistical Model\nWe use a linear regression model to estimate how age and smoking status affect sleep efficiency:\n\\[\n\\hat{Y} = \\beta_0 + \\beta_1 \\cdot \\text{Age} + \\beta_2 \\cdot \\text{SmokingStatus}_{\\text{Yes}} + \\epsilon\n\\]\nThis model assumes:\n\nY = sleep efficiency\n\nAge = age of the participant\n\nSmokingStatusYes = 1 if smoker, 0 if non-smoker\n\nβ₀ = intercept (baseline sleep efficiency)\n\nβ₁, β₂ = effect of each predictor\n\nε = random error not explained by predictors\n\n\n\n\nEstimates and 95% Confidence Intervals for Parameters\nSource: Sleep Efficiency Dataset\n\n\nterm\nestimate\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n0.7744898\n0.7340617\n0.8149178\n\n\nage\n0.0010837\n0.0001575\n0.0020099\n\n\nsmoking_statusYes\n-0.0846379\n-0.1106438\n-0.0586320"
+  },
+  {
+    "objectID": "about.html#about-me-abdul-hannan",
+    "href": "about.html#about-me-abdul-hannan",
+    "title": "Sleep Efficiency Project",
+    "section": "",
+    "text": "CS graduate from UMT Lahore who loves to travel and is passionate about data analysis and machine learning. Actively exploring R and statistical modeling to deepen my data science expertise. Always learning, always curious.\n\n\n\nSleep Efficiency Predictor\nDescription:\nA data-driven project analyzing how physiological and lifestyle factors affect sleep efficiency. It uses sleep patterns, wake/sleep habits, and behaviors (e.g., caffeine, alcohol, smoking, exercise) to model and visualize sleep quality.\n\n This project was developed as part of\nKane’s Data Science Bootcamp."
+  },
+  {
+    "objectID": "analysis.html#exploring-the-relationship-between-sleep-habits-and-quality",
+    "href": "analysis.html#exploring-the-relationship-between-sleep-habits-and-quality",
+    "title": "Sleep Efficiency Analysis by Lifestyle Factors",
+    "section": "🌙 Exploring the Relationship Between Sleep Habits and Quality",
+    "text": "🌙 Exploring the Relationship Between Sleep Habits and Quality\n\n\n\n\n\n\n\nThis scatter plot shows how sleep duration (hours) and sleep efficiency (%) are related, separated by gender. Most people sleep between 6 to 9 hours, and the best sleep efficiency usually happens with 7 to 8 hours of sleep. Both male and female participants show similar patterns, meaning their sleep quality follows the same trend."
+  },
+  {
+    "objectID": "analysis.html#exploring-relationships-among-health-and-habit-variables",
+    "href": "analysis.html#exploring-relationships-among-health-and-habit-variables",
+    "title": "Sleep Efficiency Analysis by Lifestyle Factors",
+    "section": "🔁 Exploring relationships among health and habit variables",
+    "text": "🔁 Exploring relationships among health and habit variables\n\n\n\n\n\n\n This heatmap shows how different sleep and lifestyle factors are related to each other. Dark red means a strong positive connection, while dark blue means a strong negative one. For example, more awakenings are linked with lower sleep efficiency, while longer sleep is linked with better sleep efficiency. It helps us quickly see which habits might improve or harm sleep quality."
+  },
+  {
+    "objectID": "model.html#summary-of-analysis",
+    "href": "model.html#summary-of-analysis",
+    "title": "Predicting Sleep Efficiency: Model Comparison and Explanation",
+    "section": "📝 Summary of Analysis",
+    "text": "📝 Summary of Analysis\n\nWe compared three linear models with different predictors to explain sleep efficiency.\nThe best-performing model included age and smoking status as predictors.\nSmoking was associated with lower sleep efficiency, even after adjusting for age.\nAge also had a small negative effect on sleep quality.\nThese results suggest that both lifestyle factors (like smoking) and demographics (like age) influence sleep health."
+  },
+  {
+    "objectID": "analysis.html#how-smoking-habits-relate-to-sleep-quality",
+    "href": "analysis.html#how-smoking-habits-relate-to-sleep-quality",
+    "title": "Sleep Efficiency Analysis by Lifestyle Factors",
+    "section": "🚬 How smoking habits relate to sleep quality?",
+    "text": "🚬 How smoking habits relate to sleep quality?\n\n\n\n\n\n\n This bar plot shows how much time people spend in each sleep stage based on their smoking status. Non-smokers tend to have better deep and REM sleep compared to smokers. Smoking seems to reduce the amount of deep and REM sleep, which are important for feeling rested. So, smoking may hurt sleep quality by affecting the balance of sleep stages."
+  },
+  {
+    "objectID": "source.html",
+    "href": "source.html",
+    "title": "Sleep Efficiency Project",
+    "section": "",
+    "text": "This project explores how lifestyle and body-related factors affect sleep efficiency.\nThe dataset includes details like sleep patterns, bedtime/wake-up times, and personal habits such as caffeine, alcohol, smoking, and exercise.\nI used AI tools for cleaning messy data, making visual plots, and applying models to find useful patterns.\nThe data was collected from Kaggle and is part of a capstone project.\n🔗 Sleep Efficiency Dataset on Kaggle"
+  },
+  {
+    "objectID": "source.html#data-source",
+    "href": "source.html#data-source",
+    "title": "Sleep Efficiency Project",
+    "section": "",
+    "text": "This project explores how lifestyle and body-related factors affect sleep efficiency.\nThe dataset includes details like sleep patterns, bedtime/wake-up times, and personal habits such as caffeine, alcohol, smoking, and exercise.\nI used AI tools for cleaning messy data, making visual plots, and applying models to find useful patterns.\nThe data was collected from Kaggle and is part of a capstone project.\n🔗 Sleep Efficiency Dataset on Kaggle"
+  },
+  {
+    "objectID": "analysis.html#how-different-activity-levels-relate-to-sleep-quality",
+    "href": "analysis.html#how-different-activity-levels-relate-to-sleep-quality",
+    "title": "Sleep Efficiency Analysis by Lifestyle Factors",
+    "section": "🏃‍♀️ How different activity levels relate to sleep quality?",
+    "text": "🏃‍♀️ How different activity levels relate to sleep quality?\n\n\n\n\n\n\n\nThis box plot shows how often people exercise in a week and how it affects their sleep efficiency. People who exercise more days tend to have slightly better sleep quality. However, there is still a lot of variation, meaning not everyone who exercises more always sleeps better. Regular exercise seems to be linked with better sleep for many people."
+  }
+]

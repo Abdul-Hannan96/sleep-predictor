@@ -1,5 +1,8 @@
 /.quarto/
-_files/
-_site/
 Sleep_Efficiency.csv
+model_files
+model_cache
+*_cache/
+*_files/
+
 

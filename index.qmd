@@ -2,21 +2,27 @@
 title: "Sleep Predictor"
 format: 
   html:
-    toc: false
+    toc: true
+    toc-location: right
+    toc-depth: 8
+    toc-title: "📋 Project Summary"
     code-fold: false
     echo: false
     message: false
     warning: false
     fig-align: center
     fig-cap-location: bottom
+    smooth-scroll: true
+
 ---
 
 <br>
-**Author**  
+**AUTHOR**  
 Abdul Hannan
 <br>
 <br>
-**How do lifestyle habits impact sleep efficiency?**
+**HOW DO LIFESTYLE HABITS IMPACT SLEEP EFFICIENCY?**
+
 
 
 ```{r}
@@ -128,6 +134,3 @@ We modeled **sleep efficiency** as a linear function of several lifestyle variab
 > 💡 **Insight:** Regular physical activity appears to be the **strongest predictor** of better sleep in this dataset.
 
 ---
-
-### 📦 Data Source
-- 📊 [Sleep Efficiency and Lifestyle Dataset – Kaggle](https://www.kaggle.com/datasets/melvillepais/capstone-1)

@@ -2,14 +2,20 @@
 title: "Sleep Efficiency Analysis by Lifestyle Factors"
 format: 
   html:
-    toc: false
+    toc: true
+    toc-location: right
+    toc-depth: 8
+    toc-title: "📋 Graphics"
     code-fold: false
     echo: false
     message: false
     warning: false
     fig-align: center
     fig-cap-location: bottom
+    smooth-scroll: true
+
 ---
+
 
 ```{r}
 #| label: "load-libraries"
@@ -63,7 +69,7 @@ df <- df %>%
 <br>
 <br>
 
-**Exploring the Relationship Between Sleep Habits and Quality**
+## 🌙 Exploring the Relationship Between Sleep Habits and Quality
 ```{r}
 # Define a custom color palette for Gender
 gender_colors <- c("Male" = "#6495ED", "Female" = "#FF7F50")  # Cornflower Blue and Coral
@@ -132,7 +138,8 @@ plot1
 This scatter plot shows how sleep duration (hours) and sleep efficiency (%) are related, separated by gender. Most people sleep between 6 to 9 hours, and the best sleep efficiency usually happens with 7 to 8 hours of sleep. Both male and female participants show similar patterns, meaning their sleep quality follows the same trend.
 
 <br>
-**How different activity levels relate to sleep quality?**
+
+## 🏃‍♀️ How different activity levels relate to sleep quality?
 ```{r}
 # Define a colorful palette for different exercise frequencies
 color_palette <- RColorBrewer::brewer.pal(n = length(unique(df$`Exercise Frequency (days/week)`)), name = "Set2")
@@ -192,10 +199,11 @@ plot2
 <br>
 
 This box plot shows how often people exercise in a week and how it affects their sleep efficiency. People who exercise more days tend to have slightly better sleep quality. However, there is still a lot of variation, meaning not everyone who exercises more always sleeps better. Regular exercise seems to be linked with better sleep for many people.
-
-
 <br>
-**How smoking habits relate to sleep quality?**
+
+
+## 🚬 How smoking habits relate to sleep quality?
+
 ```{r}
 
 # Prepare data
@@ -271,7 +279,7 @@ This bar plot shows how much time people spend in each sleep stage based on thei
 
 <br>
 
-**Exploring relationships among health and habit variables**
+## 🔁 Exploring relationships among health and habit variables
 ```{r}
 
 # Select numeric columns

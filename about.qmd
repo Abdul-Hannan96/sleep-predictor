@@ -1,5 +1,25 @@
----
-title: "About"
+## About Me: Abdul Hannan
+
+**CS graduate from UMT Lahore** who loves to travel and is passionate about **data analysis** and **machine learning**. Actively exploring **R** and **statistical modeling** to deepen my data science expertise. Always learning, always curious.
+
 ---
 
-About this site
+### 📁 Project
+
+**Sleep Efficiency Predictor**  
+**Description:**  
+A data-driven project analyzing how physiological and lifestyle factors affect sleep efficiency. It uses sleep patterns, wake/sleep habits, and behaviors (e.g., caffeine, alcohol, smoking, exercise) to model and visualize sleep quality.
+
+---
+
+<br>
+This project was developed as part of  
+**[Kane’s Data Science Bootcamp](https://bootcamp.davidkane.info/)**.
+
+<br>
+
+### 📬 Get In Touch
+
+[![GitHub](https://img.shields.io/badge/GitHub-Abdul--Hannan96-181717?style=flat&logo=github)](https://github.com/Abdul-Hannan96)  
+[![Repository](https://img.shields.io/badge/Project%20Repo-sleep--predictor-blue?style=flat&logo=github)](https://github.com/Abdul-Hannan96/sleep-predictor)  
+[![Email](https://img.shields.io/badge/Email-abdul.hannan20008@gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:abdul.hannan20008@gmail.com)
